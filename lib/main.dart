@@ -1,4 +1,4 @@
-import 'package:animation_with_rive/screens/onboarding_screen/onboarding.dart';
+import 'package:animation_with_rive/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rive/rive.dart';
 
+import '../signIn_form/signin_form.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -86,41 +88,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       btnAnimationController: _btnAnimationController,
                       press: () {
                         _btnAnimationController.isActive = true;
-                        showGeneralDialog(
-                          barrierDismissible: true,
-                            barrierLabel: 'Sign In',
-                            context: context,
-                            pageBuilder: (context, _, __) => Center(
-                                  child: Container(
-                                    height: 450.h,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 16.w ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white10.withOpacity(0.94),
-                                      borderRadius: BorderRadius.circular(40.r),
-                                    ),
-                                    padding:EdgeInsets.symmetric(horizontal: 24.w , vertical: 32.h) ,
-                                    child: Scaffold(
-                                      backgroundColor: Colors.transparent,
-                                      resizeToAvoidBottomInset: true,
-                                      body: Column(children: 
-                                      [
-                                        Text(
-                                          'Sign In' ,
-                                          style: TextStyle(fontSize: 34, fontFamily: 'Poppins'),),
-                                        Padding(
-                                          padding:  EdgeInsets.symmetric(horizontal: 8.h , vertical: 16.h),
-                                          child: Text(
-                                            textAlign: TextAlign.center,
-                                              'Access to 240+ hours of content. Learn design and code, by building real apps with Flutter and Swift.'
-                                          ),
-                                        ),
-                                        SignInForm(),
+                        customShowDialog(context);
 
-                                      ],),
-                                    ),
-                                  ),
-                                ));},
+                      },
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 24.h),
@@ -138,58 +108,114 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 }
-class SignInForm extends StatelessWidget {
-  const SignInForm({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Form(child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Email' , style: TextStyle(color: Colors.black54),),
-      SizedBox(
-        height: 5.h,
-      ),
-      Container(
-        color: Colors.white,
-        child: TextFormField(
-        decoration: InputDecoration(
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset('assets/icons/email.svg'),
+Future <Object?> customShowDialog (BuildContext context){
+  return showGeneralDialog(
+      barrierDismissible: true,
+      barrierLabel: 'Sign In',
+      context: context,
+      pageBuilder: (context, _, __) => Center(
+        child: Container(
+          height: 530.h,
+          margin:
+          EdgeInsets.symmetric(horizontal: 16.w),
+          decoration: BoxDecoration(
+            color: Colors.white10.withOpacity(0.94),
+            borderRadius: BorderRadius.circular(40.r),
           ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white10, ),
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-        ),
+          padding: EdgeInsets.symmetric(
+              horizontal: 24.w, vertical: 20.h),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: true,
+            body: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'Sign In',
+                      style: TextStyle(
+                          fontSize: 34,
+                          fontFamily: 'Poppins'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8.h,
+                          vertical: 16.h),
+                      child: Text(
+                          textAlign: TextAlign.center,
+                          'Access to 240+ hours of content. Learn design and code, by building real apps with Flutter and Swift.'),
+                    ),
+                    SignInForm(),
+                    Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.w),
+                          child: Text(
+                            'OR',
+                            style: TextStyle(
+                              color: Colors.black26,
+                            ),
+                          ),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 5.h),
+                      child: Text(
+                          'Sign up with Email, Apple or Google',
+                          style: TextStyle(
+                            color: Colors.black26,
+                          )),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {},
+                            icon: SvgPicture.asset(
+                              'assets/icons/email_box.svg',
+                              height: 50,
+                              width: 50,
+                            )),
+                        IconButton(
+                            onPressed: () {},
+                            icon: SvgPicture.asset(
+                              'assets/icons/apple_box.svg',
+                              height: 50,
+                              width: 50,
+                            )),
+                        IconButton(
+                            onPressed: () {},
+                            icon: SvgPicture.asset(
+                              'assets/icons/google_box.svg',
+                              height: 50,
+                              width: 50,
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
+                Positioned(
+
+                  left: 0,
+                  right: 0,
+                  bottom: -48,
+                  child: CircleAvatar(
+                    radius: 16.r,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.close, color: Colors.black,),
+                  ),
+                ),
+              ],
             ),
-      ),
-        SizedBox(
-          height: 10.h,
-        ),
-        Text('Password' , style: TextStyle(color: Colors.black54),),
-        SizedBox(
-          height: 5.h,
-        ),
-        Container(
-          color: Colors.white,
-          child: TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset('assets/icons/password.svg'),
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white38, ),
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-            ),
           ),
         ),
-      ],
-    ));
-  }
+      ));
 }
-

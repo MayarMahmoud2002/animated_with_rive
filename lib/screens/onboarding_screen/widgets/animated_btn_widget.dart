@@ -17,7 +17,7 @@ class AnimatedBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return   GestureDetector(
+    return  GestureDetector(
       onTap: press,
       child: SizedBox(
           height: 64.h,

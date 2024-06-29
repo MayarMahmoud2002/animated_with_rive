@@ -1,4 +1,4 @@
-import 'package:animation_with_rive/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:animation_with_rive/screens/signIn_form/signin_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: OnBoardingScreen(),
+          home: SignInForm(),
         );
       },
       designSize:const Size(360, 640),
